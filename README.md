@@ -2,6 +2,8 @@
 
 This is an unofficial webhook solver for [Cert Manager](https://cert-manager.io/) and [Porkbun](https://porkbun.com/).
 
+Multi-architecture container images are published for `linux/amd64` and `linux/arm64`.
+
 ## Usage
 
 1. Deploy the webhook:

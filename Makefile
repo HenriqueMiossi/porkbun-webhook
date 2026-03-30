@@ -6,7 +6,7 @@ IMAGE_TAG := "latest"
 
 OUT := $(shell pwd)/_out
 
-KUBE_VERSION=1.30.0
+KUBE_VERSION=1.35.0
 
 $(shell mkdir -p "$(OUT)")
 export TEST_ASSET_ETCD=_test/kubebuilder/bin/etcd
@@ -29,8 +29,13 @@ clean: clean-kubebuilder
 clean-kubebuilder:
 	rm -Rf _test/kubebuilder
 
+PLATFORMS ?= linux/amd64,linux/arm64
+
 build:
 	podman build -t "$(IMAGE_NAME):$(IMAGE_TAG)" .
+
+build-multiarch:
+	podman build --platform $(PLATFORMS) --manifest "$(IMAGE_NAME):$(IMAGE_TAG)" .
 
 .PHONY: rendered-manifest.yaml
 rendered-manifest.yaml:
